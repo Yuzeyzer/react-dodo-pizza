@@ -8,6 +8,10 @@
 
     svg {
       margin-right: 8px;
+      transform: rotate(180deg);
+      &.active {
+        transform: rotate(0);
+      }
     }
 
     b {
