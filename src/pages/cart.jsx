@@ -1,6 +1,32 @@
 import React from 'react';
 
 const Cart = () => {
+  const obj = [
+    {
+      name: 'Султан',
+      price: '3',
+      type: 'традиционное',
+      size: '26',
+    },
+    {
+      name: 'Султан',
+      price: '3',
+      type: 'традиционное',
+      size: '26',
+    },
+    {
+      name: 'Султан',
+      price: '3',
+      type: 'традиционное',
+      size: '26',
+    },
+    {
+      name: 'Султан',
+      price: '3',
+      type: 'традиционное',
+      size: '26',
+    },
+  ];
   return (
     <div class='content'>
       <div class='container container--cart'>
