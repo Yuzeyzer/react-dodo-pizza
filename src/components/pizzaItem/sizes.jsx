@@ -1,13 +1,21 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const Sizes = ({ sizes }) => {
-	const [activeItem, setActiveItem] = React.useState(0);
-	
-	const handleClickActive = (index) => setActiveItem(index);
+  const [activeItem, setActiveItem] = React.useState(0);
+  const sizesItems = [26, 30, 40];
+  const handleClickActive = (index) => setActiveItem(index);
   return (
     <ul>
-      {sizes.map((item, index) => (
-        <li onClick={() => handleClickActive(index)} className={activeItem === index ? 'active' : ''}>{item}</li>
+      {sizesItems.map((item, index) => (
+        <li
+          onClick={() => handleClickActive(index)}
+          className={classNames({
+            active: index === activeItem && sizes.includes(item),
+            disable: !sizes.includes(item),
+          })}>
+          {item}
+        </li>
       ))}
     </ul>
   );
