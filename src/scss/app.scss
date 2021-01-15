@@ -1,11 +1,25 @@
-@import 'fonts';
-@import 'variables';
-@import 'libs/normalize';
+@import "fonts";
+@import "variables";
+@import "libs/normalize";
 
-@import 'components/all';
+@import "components/all";
 
 body {
   background-color: $background;
+}
+
+.flex-direction-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+
+.no-background {
+  background-color: transparent;
 }
 
 .wrapper {
