@@ -2,10 +2,12 @@ import React from 'react';
 import Types from './types';
 import Sizes from './sizes';
 
-const PizzaItem = ({ name, imageUrl, price, types, sizes, onClickAddPizza }) => {
+const PizzaItem = ({ id, name, imageUrl, price, types, sizes, onClickAddPizza }) => {
+  const [count, setCount] = React.useState(0);
   const eraly = () => {
-    const obj = { name, imageUrl, price, types, sizes };
+    const obj = { id, name, imageUrl, price, types, sizes };
     onClickAddPizza(obj);
+    setCount(count + 1);
   };
   return (
     <div className='pizza-block'>
@@ -30,7 +32,7 @@ const PizzaItem = ({ name, imageUrl, price, types, sizes, onClickAddPizza }) => 
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          <i>{count}</i>
         </div>
       </div>
     </div>

@@ -1,38 +1,31 @@
 import React from 'react';
 import emptyCart from '../images/empty-cart.png';
 import CartItem from '../components/cartItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearCart, removeCartItem, plusCartItem, minusCartItem } from '../redux/actions/cart';
 const Cart = () => {
-  const obj = [
-    {
-      name: 'Султан',
-      price: '3',
-      type: 'традиционное',
-      size: '26',
-    },
-    {
-      name: 'Султан',
-      price: '3',
-      type: 'традиционное',
-      size: '26',
-    },
-    {
-      name: 'Султан',
-      price: '3',
-      type: 'традиционное',
-      size: '26',
-    },
-    {
-      name: 'Султан',
-      price: '3',
-      type: 'традиционное',
-      size: '26',
-    },
-  ];
+  const dispatch = useDispatch();
+  const { items, totalPrice, totalCount } = useSelector(({ cart }) => cart);
+  const addedPizzas = Object.keys(items).map((key) => {
+    return items[key].items[0];
+  });
+
+  const handleClearCart = () => {
+    if (window.confirm('Вы уверен что хотите полностью убрать пиццу?')) {}
+    dispatch(clearCart())
+  };
+  const handleRemoveCartItem = (id) => {
+    if (window.confirm('Вы уверен что хотите удалить пиццу?')) {
+      dispatch(removeCartItem(id));
+    }
+  };
+  const handlePlusCartItem = (id) => dispatch(plusCartItem(id));
+  const handleMinusCartItem = (id) => dispatch(minusCartItem(id));
   return (
     <div class='content'>
       <div class='container container--cart'>
         <div class='cart'>
-          {obj.length > 0 && (
+          {addedPizzas.length > 0 && (
             <>
               <div class='cart__top'>
                 <h2 class='content__title'>
@@ -103,23 +96,32 @@ const Cart = () => {
                     />
                   </svg>
 
-                  <span>Очистить корзину</span>
+                  <span onClick={handleClearCart}>Очистить корзину</span>
                 </div>
               </div>
               <div class='content__items'>
-                {obj.map((item) => (
-                  <CartItem />
-                ))}
+                {addedPizzas.map((obj) => {
+                  return (
+                    <CartItem
+                      {...obj}
+                      totalPrice={items[obj.id].totalPrice}
+                      totalCount={items[obj.id].items.length}
+                      handlePlusCartItem={handlePlusCartItem}
+                      handleMinusCartItem={handleMinusCartItem}
+                      handleRemoveCartItem={handleRemoveCartItem}
+                    />
+                  );
+                })}
               </div>
               <div class='cart__bottom'>
                 <div class='cart__bottom-details'>
                   <span>
                     {' '}
-                    Всего пицц: <b>3 шт.</b>{' '}
+                    Всего пицц: <b>{totalCount} шт.</b>{' '}
                   </span>
                   <span>
                     {' '}
-                    Сумма заказа: <b>900 ₽</b>{' '}
+                    Сумма заказа: <b>{totalPrice} ₽</b>{' '}
                   </span>
                 </div>
                 <div class='cart__bottom-buttons'>
@@ -149,7 +151,7 @@ const Cart = () => {
             </>
           )}
         </div>
-        {obj.length === 0 && (
+        {addedPizzas.length === 0 && (
           <div class='cart cart--empty'>
             <h2>
               Корзина пустая <icon>😕</icon>
