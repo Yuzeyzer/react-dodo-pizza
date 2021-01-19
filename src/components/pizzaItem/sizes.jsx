@@ -10,6 +10,7 @@ const Sizes = ({ sizes }) => {
       {sizesItems.map((item, index) => (
         <li
           onClick={() => handleClickActive(index)}
+          key={item}
           className={classNames({
             active: index === activeItem && sizes.includes(item),
             disable: !sizes.includes(item),

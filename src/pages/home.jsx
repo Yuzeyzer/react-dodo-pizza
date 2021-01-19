@@ -3,11 +3,14 @@ import PizzaItem from '../components/pizzaItem';
 import Item from '../components/item';
 import Sort from '../components/sort';
 import Categories from '../components/categories';
+import { useSelector, useDispatch } from 'react-redux';
+import { addPizzaToCart } from '../redux/actions/cart';
 
 const Home = () => {
   const [pizzas, setPizzas] = React.useState([]);
   const [snacks, setSnacks] = React.useState([]);
   const [search, setSearch] = React.useState('');
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     fetch('http://localhost:3000/db.json')
@@ -19,6 +22,7 @@ const Home = () => {
   }, []);
 
   const handleSearchValue = (event) => setSearch(event.target.value);
+  const handleAddPizzaToCart = (obj) => dispatch(addPizzaToCart(obj));
 
   return (
     <div className='content'>
@@ -45,7 +49,7 @@ const Home = () => {
               }
             })
             .map((item) => {
-              return <PizzaItem {...item} />;
+              return <PizzaItem onClickAddPizza={handleAddPizzaToCart} key={item.id} {...item} />;
             })}
         </div>
         <h2 className='content__title'>Закуски</h2>
@@ -59,7 +63,7 @@ const Home = () => {
               }
             })
             .map((item) => {
-              return <Item {...item} />;
+              return <Item key={item.id} {...item} />;
             })}
         </div>
         <h2 className='content__title'>Десерты</h2>
@@ -73,7 +77,7 @@ const Home = () => {
               }
             })
             .map((item) => {
-              return <Item {...item} />;
+              return <Item key={item.id} {...item} />;
             })}
         </div>
       </div>

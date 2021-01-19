@@ -4,8 +4,8 @@ import Header from './components/header';
 import Cart from './pages/cart';
 import { Route } from 'react-router-dom';
 import './scss/app.scss';
-function App() {
 
+function App() {
   return (
     <div className='App'>
       <div className='wrapper'>

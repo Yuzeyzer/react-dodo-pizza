@@ -1,21 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 
-const counter = (state = 0, action) => {
-  if (action.type === 'INCREMENT') {
-    return state + 1;
-  } else if (action.type === 'DECREMENT') {
-    return state - 1;
-  } else if (action.type === 'СУЛТАН-В-БОЙ') {
-    return state * 2;
-  }
-};
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Создаем Redux стор, который хранит состояние вашего приложения.
-// Его API - { subscribe, dispatch, getState }.
-let store = createStore(counter);
-window.store = store;
-
-
-store.dispatch({ type: 'INCREMENT' });
+const store = createStore(rootReducer,
+	composeEnhancers(applyMiddleware(thunk)));
 
 export default store;

@@ -2,7 +2,11 @@ import React from 'react';
 import Types from './types';
 import Sizes from './sizes';
 
-const PizzaItem = ({ name, imageUrl, price, types, sizes }) => {
+const PizzaItem = ({ name, imageUrl, price, types, sizes, onClickAddPizza }) => {
+  const eraly = () => {
+    const obj = { name, imageUrl, price, types, sizes };
+    onClickAddPizza(obj);
+  };
   return (
     <div className='pizza-block'>
       <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
@@ -13,7 +17,7 @@ const PizzaItem = ({ name, imageUrl, price, types, sizes }) => {
       </div>
       <div className='pizza-block__bottom'>
         <div className='pizza-block__price'>от {price} ₽</div>
-        <div className='button button--outline button--add'>
+        <div className='button button--outline button--add' onClick={eraly}>
           <svg
             width='12'
             height='12'

@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames  from 'classnames';
+import classNames from 'classnames';
 
 const Types = ({ types }) => {
   const [activeItem, setActiveItem] = React.useState(types[0]);
@@ -10,10 +10,11 @@ const Types = ({ types }) => {
       {typesItems.map((item, index) => (
         <li
           onClick={() => handleClickActive(index)}
+          key={item}
           className={classNames({
-						active: activeItem === index,
-						disable: !types.includes(index),
-					})}>
+            active: activeItem === index,
+            disable: !types.includes(index),
+          })}>
           {item}
         </li>
       ))}
